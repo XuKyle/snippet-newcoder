@@ -33,23 +33,22 @@ public class Solution15 {
 
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> rs = new ArrayList<>();
-
         Arrays.sort(nums);
         int n = nums.length;
 
         for (int first = 0; first < n; first++) {
-            // 如果跟上一个位置的一样
             if (first != 0 && nums[first - 1] == nums[first]) {
                 continue;
             }
 
-            int third = n - 1;
             int target = -1 * nums[first];
+            int third = n - 1;
             for (int second = first + 1; second < n; second++) {
                 if (second > first + 1 && nums[second] == nums[second - 1]) {
                     continue;
                 }
-                while (nums[second] + nums[third] > target && second < third) {
+
+                while (second < third && nums[second] + nums[third] > target) {
                     third--;
                 }
 
