@@ -14,15 +14,31 @@ public class ReverseFirstN {
         System.out.println("reversed = " + reversed);
     }
 
+
     ListNode reverseN(ListNode head, int n) {
         if (n == 1) {
             stopReverseNode = head.next;
             return head;
         }
 
-        ListNode tail = reverseN(head.next, n - 1);
+        ListNode reversed = reverseN(head.next, n - 1);
         head.next.next = head;
         head.next = stopReverseNode;
-        return tail;
+
+        return reversed;
     }
+
+
+//
+//    ListNode reverseN(ListNode head, int n) {
+//        if (n == 1) {
+//            stopReverseNode = head.next;
+//            return head;
+//        }
+//
+//        ListNode tail = reverseN(head.next, n - 1);
+//        head.next.next = head;
+//        head.next = stopReverseNode;
+//        return tail;
+//    }
 }

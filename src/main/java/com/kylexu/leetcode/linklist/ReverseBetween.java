@@ -18,26 +18,47 @@ public class ReverseBetween {
     }
 
     ListNode reverseBetween(ListNode head, int left, int right) {
-        if (left == 1) {
-            return reverse(head, right);
+        if (left == 0) {
+            return reverseHead(head, right);
         }
 
         head.next = reverseBetween(head.next, left - 1, right - 1);
-
         return head;
     }
 
-    ListNode reverse(ListNode head, int n) {
+    ListNode reverseHead(ListNode head, int n) {
         if (n == 1) {
             stopReverseNode = head.next;
             return head;
         }
-
-        ListNode rs = reverse(head.next, n - 1);
-
+        ListNode reversed = reverseHead(head.next, n - 1);
         head.next.next = head;
         head.next = stopReverseNode;
-
-        return rs;
+        return reversed;
     }
+
+
+//    ListNode reverseBetween(ListNode head, int left, int right) {
+//        if (left == 1) {
+//            return reverse(head, right);
+//        }
+//
+//        head.next = reverseBetween(head.next, left - 1, right - 1);
+//
+//        return head;
+//    }
+//
+//    ListNode reverse(ListNode head, int n) {
+//        if (n == 1) {
+//            stopReverseNode = head.next;
+//            return head;
+//        }
+//
+//        ListNode rs = reverse(head.next, n - 1);
+//
+//        head.next.next = head;
+//        head.next = stopReverseNode;
+//
+//        return rs;
+//    }
 }

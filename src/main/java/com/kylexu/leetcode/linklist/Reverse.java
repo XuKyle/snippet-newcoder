@@ -16,11 +16,43 @@ public class Reverse {
             return head;
         }
 
-        ListNode last = reverse(head.next);
-
+        ListNode reversed = reverse(head.next);
         head.next.next = head;
         head.next = null;
 
-        return last;
+        return reversed;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//    ListNode reverse(ListNode head) {
+//        if (head == null || head.next == null) {
+//            return head;
+//        }
+//
+//        ListNode last = reverse(head.next);
+//
+//        head.next.next = head;
+//        head.next = null;
+//
+//        return last;
+//    }
 }
