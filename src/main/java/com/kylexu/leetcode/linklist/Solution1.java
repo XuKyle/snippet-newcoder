@@ -54,6 +54,7 @@ public class Solution1 {
             if (map.containsKey(target - nums[i])) {
                 result[0] = i;
                 result[1] = map.get(target - nums[i]);
+                return result;
             } else {
                 map.put(nums[i], i);
             }
