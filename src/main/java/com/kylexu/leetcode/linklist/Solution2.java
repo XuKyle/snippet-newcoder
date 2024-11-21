@@ -56,10 +56,10 @@ public class Solution2 {
             if (l2 != null) {
                 l2 = l2.next;
             }
+        }
 
-            if (carry != 0) {
-                current.next = new ListNode(carry);
-            }
+        if (carry != 0) {
+            current.next = new ListNode(carry);
         }
         return head;
     }

@@ -2,6 +2,7 @@ package com.kylexu.bean;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,24 @@ public class ListNode {
     public ListNode next;
 
     public ListNode() {
+    }
+
+    public static ListNode buildListNode(int[] nums) {
+        List<ListNode> nodes = new ArrayList<>();
+        for (int num : nums) {
+            nodes.add(new ListNode(num));
+        }
+
+        for (int i = 0; i < nodes.size() - 1; i++) {
+            nodes.get(i).next = nodes.get(i + 1);
+        }
+
+        return nodes.get(0);
+    }
+
+    public static void main(String[] args) {
+        ListNode listNode = ListNode.buildListNode(new int[]{1, 2, 3});
+        System.out.println("listNode = " + listNode);
     }
 
     public ListNode(int val) {

@@ -16,8 +16,8 @@ import com.kylexu.bean.ListNode;
  */
 public class LCRSolution140 {
     public static void main(String[] args) {
-//        ListNode listNode = new ListNode(2, new ListNode(4, new ListNode(7, new ListNode(8))));
-        ListNode listNode = new ListNode(1, new ListNode(2));
+        ListNode listNode = new ListNode(2, new ListNode(4, new ListNode(7, new ListNode(8))));
+//        ListNode listNode = new ListNode(1, new ListNode(2));
         ListNode rs = new LCRSolution140().trainingPlan(listNode, 2);
         System.out.println("rs = " + rs);
     }

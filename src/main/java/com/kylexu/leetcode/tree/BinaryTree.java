@@ -3,6 +3,8 @@ package com.kylexu.leetcode.tree;
 import com.kylexu.bean.TreeNode;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -43,9 +45,28 @@ public class BinaryTree {
         preOrderTravel(root.right, rs);
     }
 
+    private List<Integer> widthTravel() {
+        List<Integer> rs = new ArrayList<>();
+        Deque<TreeNode> deque = new LinkedList<>();
+
+        deque.add(root);
+        while (!deque.isEmpty()) {
+            TreeNode node = deque.poll();
+            rs.add(node.val);
+            if (node.left != null) {
+                deque.addLast(node.left);
+            }
+            if (node.right != null) {
+                deque.addLast(node.right);
+            }
+        }
+        return rs;
+    }
+
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 2, 3, 4};
+        int[] nums = new int[]{1, 2, 3, 4, 5, 6};
         BinaryTree binaryTree = new BinaryTree(nums);
         System.out.println(binaryTree.preOrderTravel());
+        System.out.println(binaryTree.widthTravel());
     }
 }
