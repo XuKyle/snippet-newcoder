@@ -2,7 +2,7 @@ package com.kylexu.leetcode.linklist;
 
 import com.kylexu.bean.ListNode;
 
-public class SolutionLCR23 {
+public class LCRSolution23 {
     public static void main(String[] args) {
 //        输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
 
@@ -18,7 +18,7 @@ public class SolutionLCR23 {
         ListNode listNodeB1 = new ListNode(5, listNodeB2);
 
 
-        System.out.println(new SolutionLCR23().getIntersectionNode(listNodeA1, listNodeB1));
+        System.out.println(new LCRSolution23().getIntersectionNode(listNodeA1, listNodeB1));
     }
 
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
