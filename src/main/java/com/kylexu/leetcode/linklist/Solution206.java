@@ -14,14 +14,9 @@ public class Solution206 {
         ListNode preNode = null;
         ListNode current = head;
         while (current != null) {
-//            ListNode node = new ListNode(current.val);
-//            node.next = preNode;
-//            preNode = node;
-//            current = current.next;
-
             ListNode next = current.next;
-            current.next = preNode;
 
+            current.next = preNode;
             preNode = current;
             current = next;
         }
