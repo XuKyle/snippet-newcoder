@@ -1,5 +1,8 @@
 package com.kylexu.leetcode.array;
 
+
+import java.util.Arrays;
+
 /**
  * 我们要把给定的字符串 S 从左到右写到每一行上，
  * 每一行的最大宽度为100个单位，如果我们在写某个字母的时候会使这行超过了100 个单位，那么我们应该把这个字母写到下一行。
@@ -10,7 +13,7 @@ package com.kylexu.leetcode.array;
  * <p>
  * 示例 1:
  * 输入:
- * widths = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
+ * widths = [4,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
  * S = "abcdefghijklmnopqrstuvwxyz"
  * 输出: [3, 60]
  * 解释:
@@ -19,11 +22,30 @@ package com.kylexu.leetcode.array;
  */
 public class Solution806 {
     public static void main(String[] args) {
-
+        int[] widths = new int[]{4, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
+        String s = "bbbcccdddaaa";
+        int[] rs = new Solution806().numberOfLines(widths, s);
+        System.out.println("rs = " + Arrays.toString(rs));
     }
 
     public int[] numberOfLines(int[] widths, String s) {
-        //todo
-        return null;
+        int lineNumber = 0;
+        int n = s.length();
+        int currentLineLength = 0;
+
+        for (int i = 0; i < n; i++) {
+            int index = s.charAt(i) - 'a';
+            int width = widths[index];
+
+            if (currentLineLength + width <= 100) {
+                currentLineLength += width;
+            } else {
+                lineNumber++;
+                currentLineLength = width;
+            }
+        }
+
+        int lines = currentLineLength == 0 ? lineNumber : lineNumber + 1;
+        return new int[]{lines, currentLineLength};
     }
 }
