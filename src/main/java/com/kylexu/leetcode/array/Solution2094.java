@@ -1,0 +1,61 @@
+package com.kylexu.leetcode.array;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * 示例 1：
+ * 输入：digits = [2,1,3,0]
+ * 输出：[102,120,130,132,210,230,302,310,312,320]
+ * 解释：
+ * 所有满足题目条件的整数都在输出数组中列出。
+ * 注意，答案数组中不含有 奇数 或带 前导零 的整数。
+ * 示例 2：
+ * <p>
+ * 输入：digits = [2,2,8,8,2]
+ * 输出：[222,228,282,288,822,828,882]
+ * 解释：
+ * 同样的数字（0 - 9）在构造整数时可以重复多次，重复次数最多与其在 digits 中出现的次数一样。
+ * 在这个例子中，数字 8 在构造 288、828 和 882 时都重复了两次。
+ * 示例 3：
+ * <p>
+ * 输入：digits = [3,7,5]
+ * 输出：[]
+ * 解释：
+ * 使用给定的 digits 无法构造偶数。
+ */
+public class Solution2094 {
+    public static void main(String[] args) {
+        int[] digits = new int[]{3, 7, 5};
+        int[] rs = new Solution2094().findEvenNumbers(digits);
+        System.out.println("rs = " + Arrays.toString(rs));
+    }
+
+    public int[] findEvenNumbers(int[] digits) {
+        List<Integer> result = new ArrayList<>();
+
+        int n = digits.length;
+
+        for (int i = 0; i < n; i++) {
+            if (digits[i] == 0) {
+                continue;
+            }
+            for (int j = 0; j < n; j++) {
+                if (j == i) {
+                    continue;
+                }
+                for (int k = 0; k < n; k++) {
+                    if (k == i || k == j) {
+                        continue;
+                    }
+                    if (digits[k] % 2 == 0) {
+                        result.add(digits[i] * 100 + digits[j] * 10 + digits[k]);
+                    }
+                }
+            }
+        }
+
+        return result.stream().distinct().sorted().mapToInt(Integer::intValue).toArray();
+    }
+}
