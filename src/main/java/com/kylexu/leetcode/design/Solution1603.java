@@ -36,14 +36,48 @@ public class Solution1603 {
 
 
 class ParkingSystem {
+    private int maxBigCount;
+    private int maxMediumCount;
+    private int maxSmallCount;
+
+    private int currentBigCount;
+    private int currentMediumCount;
+    private int currentSmallCount;
 
     public ParkingSystem(int big, int medium, int small) {
+        this.maxBigCount = big;
+        this.maxMediumCount = medium;
+        this.maxSmallCount = small;
 
+        this.currentBigCount = big;
+        this.currentMediumCount = medium;
+        this.currentSmallCount = small;
     }
 
     public boolean addCar(int carType) {
-
-        // rodo
+        // 大，中，小，分别用数字 1， 2 和 3 表示
+        if (carType == 3) {
+            if (this.currentSmallCount >= 1) {
+                this.currentSmallCount--;
+                return true;
+            } else {
+                return false;
+            }
+        } else if (carType == 2) {
+            if (this.currentMediumCount >= 1) {
+                this.currentMediumCount--;
+                return true;
+            } else {
+                return false;
+            }
+        } else if (carType == 1) {
+            if (this.currentBigCount >= 1) {
+                this.currentBigCount--;
+                return true;
+            } else {
+                return false;
+            }
+        }
         return true;
     }
 }
