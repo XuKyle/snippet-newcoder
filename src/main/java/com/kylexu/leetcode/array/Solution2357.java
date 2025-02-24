@@ -1,6 +1,7 @@
 package com.kylexu.leetcode.array;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * 给你一个非负整数数组 nums 。在一步操作中，你必须：
@@ -24,40 +25,15 @@ import java.util.Arrays;
  */
 public class Solution2357 {
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 5, 0, 3, 5};
+        int[] nums = new int[]{0};
         System.out.println(new Solution2357().minimumOperations(nums));
     }
 
     public int minimumOperations(int[] nums) {
-        Arrays.sort(nums);
-
-        int n = nums.length;
-        int max = nums[n - 1];
-        if (max == 0) {
-            return 0;
-        }
-        int start = 0;
-
-        for (int i = nums.length - 1; i >= 0; i--) {
-            if (nums[i] == 0) {
-                start = i + 1;
-                break;
-            }
-            if (i != 0) {
-                nums[i] = nums[i] - nums[i - 1];
-            }
-        }
-
-        int sum = 0;
-        int rs = 0;
-        for (int i = start; i < n; i++) {
-            nums[i] += sum;
-            rs++;
-            if (sum >= max) {
-                return rs;
-            }
-        }
-
-        return rs;
+        return Arrays.stream(nums)
+                .boxed()
+                .filter(i -> i != 0)
+                .collect(Collectors.toSet())
+                .size();
     }
 }
