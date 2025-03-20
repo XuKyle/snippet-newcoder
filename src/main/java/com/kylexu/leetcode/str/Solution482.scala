@@ -17,8 +17,8 @@ package com.kylexu.leetcode.str
  */
 object Solution482 {
   def main(args: Array[String]): Unit = {
-    val s = "5F3Z-2e-9-w"
-    val k = 4
+    val s = "---"
+    val k = 3
     val rs = Solution482.licenseKeyFormatting(s, k)
     println(rs)
   }
@@ -26,19 +26,23 @@ object Solution482 {
   def licenseKeyFormatting(s: String, k: Int): String = {
     val str = s.replaceAll("-", "").toUpperCase.reverse
 
+    if (str.isEmpty) {
+      return ""
+    }
+
     var stringBuilder = new StringBuilder()
 
     for (i <- Range(0, str.length, k)) {
       val right = if (i + k > str.length) str.length else i + k
-      println(s"i = $i ; right = $right")
+      //      println(s"i = $i ; right = $right")
       stringBuilder.append(str.substring(i, right)).append("-")
     }
 
-    println(stringBuilder)
+    //    println(stringBuilder)
     if (stringBuilder.last == '-') {
       stringBuilder = stringBuilder.dropRight(1)
     }
-    println(stringBuilder)
+    //    println(stringBuilder)
 
     stringBuilder.reverse.toString()
   }
