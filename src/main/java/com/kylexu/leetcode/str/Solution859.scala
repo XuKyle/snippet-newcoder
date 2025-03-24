@@ -52,8 +52,6 @@ object Solution859 {
     }
 
 
-
-
     true
   }
 }
