@@ -1,9 +1,6 @@
 package com.kylexu.bean;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 深度优先遍历 前序遍历（递归法，迭代法） 中序遍历（递归法，迭代法） 后序遍历（递归法，迭代法）
@@ -39,6 +36,11 @@ public class TreeNodeTools {
         System.out.println("后序遍历: ");
         System.out.println(TreeNodeTools.postorderTraversal(root));
         System.out.println(TreeNodeTools.postorderTraversalWithStack(root));
+
+        System.out.println("层级遍历: ");
+        System.out.println(TreeNodeTools.widthTraverse(root));
+        System.out.println(TreeNodeTools.widthTraverseWithQueueV2(root));
+        System.out.println(TreeNodeTools.widthTraverseWithQueue(root));
     }
 
 
@@ -257,4 +259,86 @@ public class TreeNodeTools {
 
         return rs;
     }
+
+
+    //  **************************   层序遍历的模板  **************************
+
+    // 递归实现
+    public static List<List<Integer>> widthTraverse(TreeNode node) {
+        List<List<Integer>> rs = new ArrayList<>();
+        widthTraverseHelper(rs, node, 0);
+        return rs;
+    }
+
+    private static void widthTraverseHelper(List<List<Integer>> rs, TreeNode node, int deep) {
+        if (node == null) {
+            return;
+        }
+        deep++;
+
+        if (rs.size() < deep) {
+            rs.add(new ArrayList<>());
+        }
+
+        rs.get(deep - 1).add(node.val);
+        widthTraverseHelper(rs, node.left, deep);
+        widthTraverseHelper(rs, node.right, deep);
+    }
+
+    // 队列实现
+    public static List<Integer> widthTraverseWithQueue(TreeNode node) {
+        List<Integer> rs = new ArrayList<>();
+        LinkedList<TreeNode> helper = new LinkedList<>();
+
+        if (node == null) {
+            return rs;
+        }
+
+        helper.add(node);
+        while (!helper.isEmpty()) {
+            TreeNode treeNode = helper.removeFirst();
+            rs.add(treeNode.val);
+
+            if (treeNode.left != null) {
+                helper.add(treeNode.left);
+            }
+            if (treeNode.right != null) {
+                helper.add(treeNode.right);
+            }
+        }
+
+        return rs;
+    }
+
+    public static List<List<Integer>> widthTraverseWithQueueV2(TreeNode node) {
+        List<List<Integer>> rs = new ArrayList<>();
+        LinkedList<TreeNode> helper = new LinkedList<>();
+
+        if (node == null) {
+            return rs;
+        }
+
+        helper.add(node);
+        while (!helper.isEmpty()) {
+            List<Integer> temp = new ArrayList<>();
+            int n = helper.size();
+
+            while (n > 0) {
+                TreeNode treeNode = helper.removeFirst();
+                temp.add(treeNode.val);
+                if (treeNode.left != null) {
+                    helper.add(treeNode.left);
+                }
+                if (treeNode.right != null) {
+                    helper.add(treeNode.right);
+                }
+                n--;
+            }
+
+            rs.add(temp);
+        }
+
+        return rs;
+    }
+
 }
