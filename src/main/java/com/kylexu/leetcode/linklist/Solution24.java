@@ -18,20 +18,45 @@ import com.kylexu.bean.ListNode;
  */
 public class Solution24 {
     public ListNode swapPairs(ListNode head) {
+        ListNode dummy = new ListNode(-1, head);
+        ListNode current = dummy;
+
+        while (current.next != null && current.next.next != null) {
+            ListNode first = current.next;
+            ListNode second = current.next.next;
+
+            current.next = second;
+            first.next = second.next;
+            second.next = first;
+
+            current = current.next.next;
+        }
+
+        return dummy.next;
+    }
+
+    /**
+     * 递归方式交换
+     *
+     * @param head
+     * @return
+     */
+    public ListNode swapPairsV2(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
 
-        ListNode second = head.next;
-        head.next = swapPairs(second.next);
-        second.next = head;
+        ListNode next = head.next;
+        head.next = swapPairs(next.next);
+        next.next = head;
 
-        return second;
+        return next;
     }
 
 
     public static void main(String[] args) {
-        ListNode listNode = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
-        System.out.println(new Solution24().swapPairs(listNode));
+        ListNode listNode = ListNode.buildListNode(new int[]{1, 2, 3});
+//        System.out.println(new Solution24().swapPairs(listNode));
+        System.out.println(new Solution24().swapPairsV2(listNode));
     }
 }
