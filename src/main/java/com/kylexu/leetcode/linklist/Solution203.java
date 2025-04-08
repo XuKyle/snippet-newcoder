@@ -18,24 +18,23 @@ public class Solution203 {
 //        输入：head = [7,7,7,7], val = 7
 //        输出：[]
 
-        int[] nums = {1, 2, 6, 3, 4, 5, 6};
+//        int[] nums = {1, 2, 6, 3, 4, 5, 6};
+        int[] nums = {7, 7, 7, 7};
         ListNode head = ListNode.buildListNode(nums);
-
-        System.out.println(new Solution203().removeElements(head, 6));
+        System.out.println(new Solution203().removeElements(head, 7));
 
     }
 
 
     public ListNode removeElements(ListNode head, int val) {
         if (head == null) {
-            return head;
+            return null;
         }
-
         if (head.val == val) {
-            return removeElements(head.next, val);
+            head = removeElements(head.next, val);
         } else {
             head.next = removeElements(head.next, val);
-            return head;
         }
+        return head;
     }
 }

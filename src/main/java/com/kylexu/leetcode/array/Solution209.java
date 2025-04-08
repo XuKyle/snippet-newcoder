@@ -23,34 +23,27 @@ package com.kylexu.leetcode.array;
  */
 public class Solution209 {
     public static void main(String[] args) {
-        int target = 7;
-        int[] nums = new int[]{2, 3, 1, 2, 4, 3};
+        int target = 11;
+        int[] nums = new int[]{1, 1, 1, 1, 1, 1, 1, 1};
         int rs = new Solution209().minSubArrayLen(target, nums);
         System.out.println("rs = " + rs);
     }
 
     public int minSubArrayLen(int target, int[] nums) {
-        // todo
-//        int rs = Integer.MAX_VALUE;
-//        int n = nums.length;
-//
-//        for (int i = 0; i < n; i++) {
-//            if (nums[i] == target) {
-//                return 1;
-//            } else if (nums[i] > target) {
-//                continue;
-//            } else {
-//                int right = i + 1;
-//                int sum = nums[i] + nums[right];
-//                while (sum != target) {
-//                    right++;
-//                    sum += nums[right];
-//                    if (sum )
-//                }
-//            }
-//        }
-//
-//        return rs;
-        return 1;
+        // 所谓滑动窗口，就是不断的调节子序列的起始位置和终止位置，从而得出我们要想的结果。
+        int rs = Integer.MAX_VALUE;
+        int left = 0;
+        int sum = 0;
+
+        for (int right = 0; right < nums.length; right++) {
+            sum += nums[right];
+            while (sum >= target) {
+                rs = Math.min(rs, right - left + 1);
+                sum -= nums[left];
+                left++;
+            }
+        }
+
+        return rs == Integer.MAX_VALUE ? 0 : rs;
     }
 }

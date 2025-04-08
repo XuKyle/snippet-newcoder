@@ -3,7 +3,6 @@ package com.kylexu.leetcode.binarytree;
 import com.kylexu.bean.NodePro;
 import com.kylexu.bean.TreeNode;
 import com.kylexu.bean.TreeNodeTools;
-import com.kylexu.test.Node;
 
 import java.util.Arrays;
 import java.util.LinkedList;
