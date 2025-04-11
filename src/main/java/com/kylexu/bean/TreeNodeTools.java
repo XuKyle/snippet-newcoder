@@ -43,6 +43,9 @@ public class TreeNodeTools {
         System.out.println(TreeNodeTools.widthTraverseWithQueue(root));
     }
 
+    public static TreeNode buildTree(Integer[] nums) {
+        return buildTree(Arrays.stream(nums).toList());
+    }
 
     public static TreeNode buildTree(List<Integer> nums) {
         List<TreeNode> treeNodes = new ArrayList<>();

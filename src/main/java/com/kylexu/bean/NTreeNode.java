@@ -22,4 +22,15 @@ public class NTreeNode {
         this.val = _val;
         this.children = _children;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        
+
+        return "NTreeNode{" +
+                "val=" + val +
+                ", children=" + children +
+                '}';
+    }
 }

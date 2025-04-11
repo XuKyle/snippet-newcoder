@@ -26,16 +26,14 @@ public class Solution101 {
         if (left == null && right == null) {
             return true;
         }
-
         if (left == null || right == null) {
             return false;
         }
 
         if (left.val == right.val) {
-            return check(left.left, right.right) && check(left.right, right.left);
+            return check(left.right, right.left) && check(left.left, right.right);
         }
 
         return false;
     }
-
 }
