@@ -6,17 +6,14 @@ import com.kylexu.bean.NTreeNodeTools;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Solution589 {
+public class Solution590 {
     public static void main(String[] args) {
-        NTreeNode root = NTreeNodeTools.buildTree(new Integer[]{1, null, 2, 3, 4, 5, null, null, 6, 7, null, 8, null, 9, 10, null, null, 11, null, 12, null, 13, null, null, 14});
-
-        //                [1,2,3,6,7,11,14,4,8,12,5,9,13,10]
-        // [1, 2, 3, 6, 7, 11, 14, 4, 8, 12, 5, 9, 13, 10]
-        var rs = new Solution589().preorder(root);
-        System.out.println("rs = " + rs);
+        NTreeNode nTreeNode = NTreeNodeTools.buildTree(new Integer[]{1, null, 3, 2, 4, null, 5, 6});
+        List<Integer> postorder = new Solution590().postorder(nTreeNode);
+        System.out.println("postorder = " + postorder);
     }
 
-    public List<Integer> preorder(NTreeNode root) {
+    public List<Integer> postorder(NTreeNode root) {
         List<Integer> rs = new ArrayList<>();
         dfs(root, rs);
         return rs;
@@ -27,12 +24,11 @@ public class Solution589 {
             return;
         }
 
-        rs.add(root.val);
-        if (root.children != null) {
+        if (root.children != null && !root.children.isEmpty()) {
             for (NTreeNode child : root.children) {
                 dfs(child, rs);
-
             }
         }
+        rs.add(root.val);
     }
 }
