@@ -17,13 +17,24 @@ package com.kylexu.leetcode.array;
  */
 public class Solution1588 {
     public static void main(String[] args) {
-        int[] arr = new int[]{};
+        int[] arr = new int[]{10, 11, 12};
         System.out.println(new Solution1588().sumOddLengthSubarrays(arr));
     }
 
     public int sumOddLengthSubarrays(int[] arr) {
+        int rs = 0;
 
-        // todo
-        return 0;
+        int n = arr.length;
+
+        // i = 子串的长度
+        for (int i = 1; i < n + 1; i += 2) {
+            for (int j = 0; j < n && j + i - 1 < n; j++) {
+                for (int k = j; k < j + i; k++) {
+                    rs += arr[k];
+                }
+            }
+        }
+
+        return rs;
     }
 }
