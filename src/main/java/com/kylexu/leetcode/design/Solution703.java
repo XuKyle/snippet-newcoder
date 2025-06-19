@@ -1,5 +1,7 @@
 package com.kylexu.leetcode.design;
 
+import java.util.*;
+
 /**
  * 设计一个找到数据流中第 k 大元素的类（class）。注意是排序后的第 k 大元素，不是第 k 个不同的元素。
  * 请实现 KthLargest 类：
@@ -43,26 +45,72 @@ package com.kylexu.leetcode.design;
  */
 public class Solution703 {
     public static void main(String[] args) {
-        int k = 3;
-        int[] nums = new int[]{4, 5, 8, 2};
+        int k = 4;
+        int[] nums = new int[]{7, 7, 7, 7, 8, 3};
         KthLargest kthLargest = new KthLargest(k, nums);
-        System.out.println(kthLargest.add(3));
-        System.out.println(kthLargest.add(5));
+        System.out.println(kthLargest.add(2));
         System.out.println(kthLargest.add(10));
         System.out.println(kthLargest.add(9));
-        System.out.println(kthLargest.add(4));
+        System.out.println(kthLargest.add(9));
     }
 }
 
-
 class KthLargest {
+    private PriorityQueue<Integer> queue;
+    private int k = 0;
 
     public KthLargest(int k, int[] nums) {
+        this.k = k;
+        this.queue = new PriorityQueue<>(k, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Integer.compare(o1, o2);
+            }
+        });
 
+        for (int num : nums) {
+            add(num);
+        }
     }
 
     public int add(int val) {
-        // todo
+        this.queue.offer(val);
+        if (this.queue.size() > k) {
+            this.queue.poll();
+        }
+        return this.queue.peek();
+    }
+}
+
+class KthLargest1 {
+    private Map<Integer, Integer> holder = new TreeMap<Integer, Integer>(new Comparator<Integer>() {
+        @Override
+        public int compare(Integer left, Integer right) {
+            return Integer.compare(right, left);
+        }
+    });
+    private int k = 0;
+
+    public KthLargest1(int k, int[] nums) {
+        this.k = k;
+
+        for (int num : nums) {
+            holder.merge(num, 1, Integer::sum);
+        }
+    }
+
+    public int add(int val) {
+        holder.merge(val, 1, Integer::sum);
+
+        int top = 0;
+        for (Map.Entry<Integer, Integer> entry : holder.entrySet()) {
+            if (top + entry.getValue() >= k) {
+                return entry.getKey();
+            } else {
+                top += entry.getValue();
+            }
+        }
+
         return 1;
     }
 }
