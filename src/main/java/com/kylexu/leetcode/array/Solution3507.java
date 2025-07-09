@@ -30,10 +30,23 @@ public class Solution3507 {
         System.out.println("rs = " + rs);
     }
 
+    int rs = 0;
+
     public int minimumPairRemoval(int[] nums) {
         if (nonDecreasing(nums)) {
             return 0;
         }
+
+        int l = -1;
+        int minValue = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length - 1; i++) {
+            int currentPair = nums[i] + nums[i + 1];
+            minValue = Math.min(currentPair, minValue);
+            if (minValue == currentPair) {
+                l = i;
+            }
+        }
+
 
 
         // todo

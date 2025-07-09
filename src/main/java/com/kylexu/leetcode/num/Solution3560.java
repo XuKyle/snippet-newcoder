@@ -16,6 +16,6 @@ public class Solution3560 {
             return 0;
         }
 
-        return 0;
+        return (long) (m - k) * k;
     }
 }

@@ -14,15 +14,21 @@ public class Solution563 {
         System.out.println("tilt = " + tilt);
     }
 
+    int rs = 0;
+
     public int findTilt(TreeNode root) {
-
-        return 0;
+        dfs(root);
+        return rs;
     }
 
+    private int dfs(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
 
-    private int leftSum(TreeNode root) {
-        return 1;
+        int l = dfs(root.left);
+        int r = dfs(root.right);
+        rs += Math.abs(l - r);
+        return root.val + l + r;
     }
-
-
 }
