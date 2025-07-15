@@ -1,5 +1,7 @@
 package com.kylexu.leetcode.array;
 
+import java.util.Arrays;
+
 /**
  * 示例 1：
  * <p>
@@ -30,32 +32,37 @@ public class Solution3507 {
         System.out.println("rs = " + rs);
     }
 
-    int rs = 0;
 
     public int minimumPairRemoval(int[] nums) {
-        if (nonDecreasing(nums)) {
-            return 0;
-        }
+        int rs = 0;
+        int n = nums.length;
 
-        int l = -1;
-        int minValue = Integer.MAX_VALUE;
-        for (int i = 0; i < nums.length - 1; i++) {
-            int currentPair = nums[i] + nums[i + 1];
-            minValue = Math.min(currentPair, minValue);
-            if (minValue == currentPair) {
-                l = i;
+        while (!nonDecreasing(nums, n)) {
+            int pairMin = Integer.MAX_VALUE;
+            int index = -1;
+            for (int i = 0; i < n - 1; i++) {
+                int currentPair = nums[i] + nums[i + 1];
+                if (currentPair < pairMin) {
+                    pairMin = currentPair;
+                    index = i;
+                }
             }
+
+            nums[index] = nums[index] + nums[index + 1];
+
+            for (int i = index + 1; i < n - 1; i++) {
+                nums[i] = nums[i + 1];
+            }
+
+            n--;
+            rs++;
         }
-
-
-
-        // todo
-        return 0;
+        return rs;
     }
 
-    private boolean nonDecreasing(int[] nums) {
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (nums[i] > nums[i + 1]) {
+    private boolean nonDecreasing(int[] nums, int n) {
+        for (int i = 1; i < n; i++) {
+            if (nums[i] < nums[i - 1]) {
                 return false;
             }
         }
