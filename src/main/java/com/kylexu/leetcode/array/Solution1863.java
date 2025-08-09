@@ -1,5 +1,8 @@
 package com.kylexu.leetcode.array;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 一个数组的 异或总和 定义为数组中所有元素按位 XOR 的结果；如果数组为 空 ，则异或总和为 0 。
  * <p>
@@ -44,12 +47,43 @@ package com.kylexu.leetcode.array;
  */
 public class Solution1863 {
     public static void main(String[] args) {
-        int[] nums = {1, 3};
+        int[] nums = {5, 1, 6};
         int i = new Solution1863().subsetXORSum(nums);
         System.out.println("i = " + i);
     }
 
     public int subsetXORSum(int[] nums) {
-        return 1;
+        int rs = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j <= nums.length; j++) {
+                List<Integer> temp = new ArrayList<>();
+
+                for (int k = i; k < j; k++) {
+                    temp.add(nums[k]);
+                }
+                int xor = xor(temp);
+                System.out.println("temp = " + temp);
+                System.out.println("xor = " + xor);
+                rs += xor;
+            }
+        }
+
+        return rs;
+    }
+
+    public int xor(List<Integer> list) {
+        if (list.isEmpty()) {
+            return 0;
+        }
+        if (list.size() == 1) {
+            return list.get(0);
+        }
+
+        int rs = list.get(0) ^ list.get(1);
+        for (int i = 2; i < list.size(); i++) {
+            rs = rs ^ list.get(i);
+        }
+        return rs;
     }
 }
