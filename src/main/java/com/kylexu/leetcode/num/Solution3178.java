@@ -15,7 +15,26 @@ public class Solution3178 {
     }
 
     public int numberOfChild(int n, int k) {
-        //todo
-        return  1;
+        int current = 0;
+        boolean forward = true;
+        for (int i = 1; i <= k; i++) {
+            if (forward) {
+                if (current == n - 1) {
+                    forward = false;
+                    current--;
+                } else {
+                    current++;
+                }
+            } else {
+                if (current == 0) {
+                    forward = true;
+                    current++;
+                } else {
+                    current--;
+                }
+            }
+        }
+
+        return current;
     }
 }
