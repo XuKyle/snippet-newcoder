@@ -25,13 +25,13 @@ package com.kylexu.leetcode.array
  * 输出：-1
  * 解释：因为 words 中不存在字符串 "ate" ，所以返回 -1 。
  */
-object Solution2515 {
+object Solution2515V1 {
   def main(args: Array[String]): Unit = {
     val words = Array("a", "b", "leetcode")
     val target = "leetcode"
     val startIndex = 0
 
-    val rs = Solution2515.closestTarget(words = words, target = target, startIndex = startIndex)
+    val rs = Solution2515V1.closestTarget(words = words, target = target, startIndex = startIndex)
     println(rs)
   }
 
